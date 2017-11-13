@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  lender: 1
+  debtor: 1
+  amt: 1
+
+two:
+  lender: 1
+  debtor: 1
+  amt: 1

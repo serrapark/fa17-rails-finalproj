@@ -1,0 +1,2 @@
+class IousController < ApplicationController
+end
