@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 	before_action :authenticate_user!
 
 # home page / dashboard ------------------------------------------------
-	
+
 	def show
 		@dtotalDebts = total_debts()
 		@totalLoans = total_loans()
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 	end
 
 # debts page + loans page ----------------------------------------------
-	
+
 	# returns hash of user => amt you owe them
 	def debts
 		q = query()
@@ -90,7 +90,7 @@ class UsersController < ApplicationController
 
 			# if the person owes you but you don't owe them
 			if (not dusers.keys.include?(duser))
-				result[duser] = - amt_due
+				result[duser] =- amt_due
 			end
 
 		end
@@ -114,7 +114,7 @@ class UsersController < ApplicationController
 
 			tmp = Array.new
 			Iou.find_each do |t|
-				if (t.lender =  and t.debtor = current_user.debtor_id) or (t.lender = current_user.lender_id and t.debtor = lender)
+				if (t.lender == current_user.debtor_id  and t.debtor == current_user.debtor_id) or (t.lender == current_user.lender_id and t.debtor == lender)
 					tmp.push(t)
 				end
 			end
