@@ -1,0 +1,7 @@
+<%= simple_form_for @iou, :url => "/transaction/new" do |t| %>
+  <%= t.input :description, label: 'Description'%>
+  <%= t.input :amt, label: 'How much?'%>
+  <%= t.input :lender, label: 'Who paid?'%>
+  <%= t.input :debtor, label: 'Who was paid for?'%>
+  <%= t.button :submit %>
+<% end %>

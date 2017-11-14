@@ -1,0 +1,9 @@
+<h1> <%= current_user.email %>'s Loans </h1>
+
+<br>
+<% @simplifiedLoans.each do |debtor, amt|%>
+
+	<%= debtor %>
+	$<%= amt %>
+
+<% end %>
