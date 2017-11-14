@@ -22,6 +22,9 @@ class UsersController < ApplicationController
 	def loans
 		q = query()
 		q.delete_if {|key, value| value >= 0}
+		q.each do |user, amt|
+			q[user] = -amt
+		end
 		@simplifiedLoans = q
 	end
 
@@ -33,43 +36,55 @@ class UsersController < ApplicationController
 	def query
 
 		# get the ious where the current user is the debtor (you owe money)
-		dquery = Iou.select(:lender, sum(:amt)).where(debtor: current_user.debtor_id).group(:lender)
-		# user_id of who you owe => amount you owe
-		dusers = Hash.new
-		dquery.each do |lender, amt_owed|
-			dusers[User.select(:user_id).where(lender_id: lender)] = amt_owed
+		dquery = Iou.where(debtor_id: current_user.id)
+		# make hash from the person you owe => how much you owe them
+		debts = Hash.new
+		dquery.each do |iou|
+			key = iou.lender_id
+			if (debts.keys.include?(key))
+				value = debts[key]
+				debts[key] = value + iou.amt
+			else
+				debts[key] = iou.amt
+			end
 		end
 
-
 		# get the ious where the current user is the lender (you are owed money)
-		lquery = Iou.select(:debtor, sum(:amt)).where(lender: current_user.lender_id).group(:debtor)
-		# user_id of who owes you => amount they owe
-		lusers = Hash.new
-		lquery.each do |debtor, amt_due|
-			lusers[User.select(:user_id).where(debtor_id: debtor)] = amt_due
+		lquery = Iou.where(lender_id: current_user.id)
+		# make hash from the person who owes you => how much they owe you
+		loans = Hash.new
+		lquery.each do |iou|
+			key = iou.debtor_id
+			if (loans.keys.include?(key))
+				value = loans[key]
+				loans[key] = value + iou.amt
+			else
+				loans[key] = iou.amt
+
+			end
 		end
 
 
 		result = Hash.new
-		dusers.each do |luser, amt_owed|
+		debts.each do |lender, amt_owed|
 
 			# if you owe this person and this person owes you
-			if (lusers.keys.include?(luser))
-				amt_due = lusers[luser]
+			if (loans.keys.include?(lender))
+				amt_due = loans[lender]
 				diff = amt_owed - amt_due
-				result[luser] = diff
+				result[User.find(lender).email] = diff
 
 			# if you owe this person and this person doesn't owe you
 			else
-				result[luser] = amt_owed
+				result[User.find(lender).email] = amt_owed
 			end
 
 		end
-		lusers.each do |duser, amt_due|
+		loans.each do |debtor, amt_due|
 
 			# if the person owes you but you don't owe them
-			if (not dusers.keys.include?(duser))
-				result[duser] =- amt_due
+			if (not debts.keys.include?(debtor))
+				result[User.find(debtor).email] = -amt_due
 			end
 
 		end
