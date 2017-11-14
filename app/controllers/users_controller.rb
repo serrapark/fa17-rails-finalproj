@@ -4,31 +4,10 @@ class UsersController < ApplicationController
 # home page / dashboard ------------------------------------------------
 
 	def show
-		@dtotalDebts = total_debts()
-		@totalLoans = total_loans()
+		@totalDebts = Iou.where(debtor_id: current_user.id).sum(:amt)
+		@totalLoans = Iou.where(lender_id: current_user.id).sum(:amt)
 	end
 
-	# helper to calculate how much the current_user owes
-	def total_debts
-		sum = 0
-		Iou.find_each do |t|
-			if (t.debtor == current_user.debtor_id)
-				sum += t.amt
-			end
-		end
-		return sum
-	end
-
-	# helper to calculate how much the current_user is owed
-	def total_loans
-		sum = 0
-		Iou.find_each do |t|
-			if (t.lender== current_user.lender_id)
-				sum += t.amt
-			end
-		end
-		return sum
-	end
 
 # debts page + loans page ----------------------------------------------
 
