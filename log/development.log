@@ -3359,3 +3359,9 @@ Processing by UsersController#debts as HTML
 Completed 200 OK in 53ms (Views: 47.2ms | ActiveRecord: 0.6ms)
 
 
+  [1m[36mIou Load (0.1ms)[0m  [1m[34mSELECT  "ious".* FROM "ious" WHERE "ious"."lender_id" = ? LIMIT ?[0m  [["lender_id", 2], ["LIMIT", 11]]
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT  "ious".* FROM "ious" WHERE (lender_id = 2 or debtor_id = 2) LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mIou Load (0.3ms)[0m  [1m[34mSELECT  "ious".* FROM "ious" WHERE (lender_id = 2 and debtor_id = 4) LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT  "ious".* FROM "ious" WHERE (lender_id = 4 and debtor_id = 2) LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mIou Load (0.3ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 2 and debtor_id = 4)[0m
+  [1m[36mIou Load (0.3ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 4 and debtor_id = 2)[0m
