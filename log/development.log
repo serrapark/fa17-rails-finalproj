@@ -3365,3 +3365,135 @@ Completed 200 OK in 53ms (Views: 47.2ms | ActiveRecord: 0.6ms)
   [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT  "ious".* FROM "ious" WHERE (lender_id = 4 and debtor_id = 2) LIMIT ?[0m  [["LIMIT", 11]]
   [1m[36mIou Load (0.3ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 2 and debtor_id = 4)[0m
   [1m[36mIou Load (0.3ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 4 and debtor_id = 2)[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT  "ious".* FROM "ious" LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mIou Load (0.1ms)[0m  [1m[34mSELECT  "ious".* FROM "ious" LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "ious" ("lender_id", "debtor_id", "amt", "created_at", "updated_at", "description") VALUES (?, ?, ?, ?, ?, ?)[0m  [["lender_id", 3], ["debtor_id", 2], ["amt", 1], ["created_at", "2017-11-15 00:16:08.893377"], ["updated_at", "2017-11-15 00:16:08.893377"], ["description", "tip"]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/" for 127.0.0.1 at 2017-11-14 16:16:20 -0800
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT SUM("ious"."amt") FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 4]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT SUM("ious"."amt") FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 4]]
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (1.1ms)
+  Rendered layouts/_navigation_links.html.erb (1.0ms)
+  Rendered layouts/_navigation.html.erb (4.3ms)
+  Rendered layouts/_messages.html.erb (0.7ms)
+Completed 200 OK in 164ms (Views: 68.0ms | ActiveRecord: 2.4ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2017-11-14 16:16:22 -0800
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"tP/PELh2EaBjjS/MINudOfauvXrOOwRxKl+2NE1Rb1YmhR3bT2td2azTZPKc45+nUnqHHlJarFgrdNe/fRW5PQ=="}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 4ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-11-14 16:16:22 -0800
+Processing by UsersController#show as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2017-11-14 16:16:22 -0800
+Processing by Devise::SessionsController#new as HTML
+  Rendering /Users/parenillo/.rvm/gems/ruby-2.4.0/gems/devise-4.3.0/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /Users/parenillo/.rvm/gems/ruby-2.4.0/gems/devise-4.3.0/app/views/devise/shared/_links.html.erb (8.9ms)
+  Rendered /Users/parenillo/.rvm/gems/ruby-2.4.0/gems/devise-4.3.0/app/views/devise/sessions/new.html.erb within layouts/application (15.6ms)
+  Rendered layouts/_navigation_links.html.erb (0.7ms)
+  Rendered layouts/_navigation.html.erb (2.5ms)
+  Rendered layouts/_messages.html.erb (0.5ms)
+Completed 200 OK in 58ms (Views: 56.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2017-11-14 16:16:31 -0800
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ojNCpH7sB8qHUcs67czVrzNeBOI7dievuIGHo5fvriT3Txek0S+lTl67EOomIHA6yBTQwSeGr9BM4VTnijROxA==", "user"=>{"email"=>"parenillo@berkeley.edu", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "parenillo@berkeley.edu"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "users" SET "current_sign_in_at" = ?, "last_sign_in_at" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["current_sign_in_at", "2017-11-15 00:16:31.968218"], ["last_sign_in_at", "2017-11-14 23:06:58.563887"], ["sign_in_count", 5], ["updated_at", "2017-11-15 00:16:31.968907"], ["id", 2]]
+  [1m[35m (6.0ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 169ms (ActiveRecord: 6.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-11-14 16:16:31 -0800
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT SUM("ious"."amt") FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 2]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT SUM("ious"."amt") FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 2]]
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (0.7ms)
+  Rendered layouts/_navigation_links.html.erb (0.8ms)
+  Rendered layouts/_navigation.html.erb (4.0ms)
+  Rendered layouts/_messages.html.erb (0.7ms)
+Completed 200 OK in 39ms (Views: 34.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/debts" for 127.0.0.1 at 2017-11-14 16:16:39 -0800
+Processing by UsersController#debts as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mIou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 2]]
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 2]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering users/debts.html.erb within layouts/application
+  Rendered users/debts.html.erb within layouts/application (0.7ms)
+  Rendered layouts/_navigation_links.html.erb (1.2ms)
+  Rendered layouts/_navigation.html.erb (4.3ms)
+  Rendered layouts/_messages.html.erb (1.0ms)
+Completed 200 OK in 74ms (Views: 55.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/loans" for 127.0.0.1 at 2017-11-14 16:16:44 -0800
+Processing by UsersController#loans as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mIou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 2]]
+  [1m[36mIou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 2]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering users/loans.html.erb within layouts/application
+  Rendered users/loans.html.erb within layouts/application (0.8ms)
+  Rendered layouts/_navigation_links.html.erb (1.1ms)
+  Rendered layouts/_navigation.html.erb (5.0ms)
+  Rendered layouts/_messages.html.erb (0.9ms)
+Completed 200 OK in 72ms (Views: 60.8ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/loans" for 127.0.0.1 at 2017-11-14 16:17:02 -0800
+Processing by UsersController#loans as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 2]]
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 2]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering users/loans.html.erb within layouts/application
+  Rendered users/loans.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_navigation_links.html.erb (1.4ms)
+  Rendered layouts/_navigation.html.erb (5.1ms)
+  Rendered layouts/_messages.html.erb (1.0ms)
+Completed 200 OK in 59ms (Views: 51.3ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/loans" for 127.0.0.1 at 2017-11-14 16:17:19 -0800
+Processing by UsersController#loans as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 2]]
+  [1m[36mIou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 2]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering users/loans.html.erb within layouts/application
+  Rendered users/loans.html.erb within layouts/application (0.7ms)
+  Rendered layouts/_navigation_links.html.erb (2.4ms)
+  Rendered layouts/_navigation.html.erb (33.3ms)
+  Rendered layouts/_messages.html.erb (0.6ms)
+Completed 200 OK in 101ms (Views: 85.7ms | ActiveRecord: 0.9ms)
+
+
