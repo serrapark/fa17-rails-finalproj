@@ -1,20 +1,26 @@
+<div class="container">
+  <div class="col-lg-10">
+
 <h1> <%= current_user.email %>'s Dashboard </h1>
 
 <br>
-<h4> 
-	<u>Amount You Owe:</u> 
+<h4>
+	<u>Amount You Owe:</u>
 </h4>
 	$<%= @totalDebts %>
 	<br><br>
 	<%= link_to 'See Details', '/debts' %>
 
 <br><br>
-<h4> 
-	<u>Amount Others Owe You:</u> 
+<h4>
+	<u>Amount Others Owe You:</u>
 </h4>
-	$<%= @totalLoans %> 
+	$<%= @totalLoans %>
 	<br><br>
 	<%= link_to 'See Details', '/loans' %>
 
 <br><br><br>
 <%= button_to "Add New Transaction", "/transaction/new", :class => "button medium", :method => :get %>
+
+	</div>
+</div>
