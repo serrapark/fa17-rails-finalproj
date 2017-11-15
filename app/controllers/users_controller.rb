@@ -1,34 +1,27 @@
 class UsersController < ApplicationController
 	before_action :authenticate_user!
 
+# NOTES FOR FRONTEND ---------------------------------------------------
+#
+# For home page / dashboard
+# 		@totalDebts is the sum of the current_user's debts (int)
+# 		@totalLoans is the sum of the current_user's loans (int)
+#
+# For debts/loans page (see details link from homepage)
+# 		@simplifiedDebts is how much the current_user owes each person if anything (person you owe => amount you owe them)
+# 		@simplifiedLoans is how much the current_user lent each person if anything (person who owes you => amount they owe you)
+#
+# For detailed debts/loans page (idk if should be a separate page. whichever makes more sense / looks better. but these vars will be useful somehow)
+# 		@detailedDebts is all the ious between the current user and the people they owe money to (person you owe => [lender, debtor, amt, description])
+# 		@detailedLoans is all the ious between the current user and the people they lent money to (person who owes you => [lender, debtor, amt, description])
+
 # home page / dashboard ------------------------------------------------
 
 	def show
-		@dtotalDebts = total_debts()
-		@totalLoans = total_loans()
+		@totalDebts = Iou.where(debtor_id: current_user.id).sum(:amt)
+		@totalLoans = Iou.where(lender_id: current_user.id).sum(:amt)
 	end
 
-	# helper to calculate how much the current_user owes
-	def total_debts
-		sum = 0
-		Iou.find_each do |t|
-			if (t.debtor == current_user.debtor_id)
-				sum += t.amt
-			end
-		end
-		return sum
-	end
-
-	# helper to calculate how much the current_user is owed
-	def total_loans
-		sum = 0
-		Iou.find_each do |t|
-			if (t.lender== current_user.lender_id)
-				sum += t.amt
-			end
-		end
-		return sum
-	end
 
 # debts page + loans page ----------------------------------------------
 
@@ -43,6 +36,9 @@ class UsersController < ApplicationController
 	def loans
 		q = query()
 		q.delete_if {|key, value| value >= 0}
+		q.each do |user, amt|
+			q[user] = -amt
+		end
 		@simplifiedLoans = q
 	end
 
@@ -54,43 +50,55 @@ class UsersController < ApplicationController
 	def query
 
 		# get the ious where the current user is the debtor (you owe money)
-		dquery = Iou.select(:lender, sum(:amt)).where(debtor: current_user.debtor_id).group(:lender)
-		# user_id of who you owe => amount you owe
-		dusers = Hash.new
-		dquery.each do |lender, amt_owed|
-			dusers[User.select(:user_id).where(lender_id: lender)] = amt_owed
+		dquery = Iou.where(debtor_id: current_user.id)
+		# make hash from the person you owe => how much you owe them
+		debts = Hash.new
+		dquery.each do |iou|
+			key = iou.lender_id
+			if (debts.keys.include?(key))
+				value = debts[key]
+				debts[key] = value + iou.amt
+			else
+				debts[key] = iou.amt
+			end
 		end
 
-
 		# get the ious where the current user is the lender (you are owed money)
-		lquery = Iou.select(:debtor, sum(:amt)).where(lender: current_user.lender_id).group(:debtor)
-		# user_id of who owes you => amount they owe
-		lusers = Hash.new
-		lquery.each do |debtor, amt_due|
-			lusers[User.select(:user_id).where(debtor_id: debtor)] = amt_due
+		lquery = Iou.where(lender_id: current_user.id)
+		# make hash from the person who owes you => how much they owe you
+		loans = Hash.new
+		lquery.each do |iou|
+			key = iou.debtor_id
+			if (loans.keys.include?(key))
+				value = loans[key]
+				loans[key] = value + iou.amt
+			else
+				loans[key] = iou.amt
+
+			end
 		end
 
 
 		result = Hash.new
-		dusers.each do |luser, amt_owed|
+		debts.each do |lender, amt_owed|
 
 			# if you owe this person and this person owes you
-			if (lusers.keys.include?(luser))
-				amt_due = lusers[luser]
+			if (loans.keys.include?(lender))
+				amt_due = loans[lender]
 				diff = amt_owed - amt_due
-				result[luser] = diff
+				result[User.find(lender).email] = diff
 
 			# if you owe this person and this person doesn't owe you
 			else
-				result[luser] = amt_owed
+				result[User.find(lender).email] = amt_owed
 			end
 
 		end
-		lusers.each do |duser, amt_due|
+		loans.each do |debtor, amt_due|
 
 			# if the person owes you but you don't owe them
-			if (not dusers.keys.include?(duser))
-				result[duser] =- amt_due
+			if (not debts.keys.include?(debtor))
+				result[User.find(debtor).email] = -amt_due
 			end
 
 		end
@@ -102,24 +110,21 @@ class UsersController < ApplicationController
 	# returns person you owe => list of ious between you and that person
 	def detailed_debts
 		# get the ious where the current user is the debtor (you owe money)
-		lenders = Iou.select(:lender).where(debtor: current_user.debtor_id).distinct
-		lusers = Array.new
-		lenders.each do |l|
-			lusers.push(User.select(:user_id, :lender_id, :debtor_id).where(lender_id: l))
+		dquery = Iou.where(debtor_id: current_user.id)
+		# make set of people that have lent to you
+		lenders = Set.new
+		dquery.each do |iou|
+			lenders.add(iou.lender_id)
 		end
 
 		# for each lender, get all ious between you and that lender
 		result = Hash.new
-		lusers.each do |luser|
-
+		lenders.each do |lender|
 			tmp = Array.new
-			Iou.find_each do |t|
-				if (t.lender == current_user.debtor_id  and t.debtor == current_user.debtor_id) or (t.lender == current_user.lender_id and t.debtor == lender)
-					tmp.push(t)
-				end
-			end
-			result[lender] = tmp
-
+			q1 = Iou.where("lender_id = ? and debtor_id = ?", lender, current_user.id)
+			q2 = Iou.where("lender_id = ? and debtor_id = ?", current_user.id, lender)
+			q = q1 + q2
+			result[lender] = [User.find(q.lender).email, User.find(q.debtor).email, q.amt, q.description]
 		end
 		@detailedDebts = result
 	end
@@ -127,20 +132,21 @@ class UsersController < ApplicationController
 	# returns person that owes you => list of ious between you and that person
 	def detailed_loans
 		# get the ious where the current user is the lender (they owe you money)
-		debtors = Iou.select(:debtor).where(lender: current_user.debtor_id).distinct
+		lquery = Iou.where(lender_id: current_user.id)
+		# make set of people you have lent to
+		debtors = Set.new
+		lquery.each do |iou|
+			debtors.add(iou.debtor_id)
+		end
 
-		# for each debtor, get all ious between you and that debtor
+		# for each lender, get all ious between you and that lender
 		result = Hash.new
 		debtors.each do |debtor|
-
 			tmp = Array.new
-			Iou.find_each do |t|
-				if (t.lender = debtor and t.debtor = current_user.debtor_id) or (t.lender = current_user.lender_id and t.debtor = lender)
-					tmp.push(t)
-				end
-			end
-			result[lender] = tmp
-
+			q1 = Iou.where("lender_id = ? and debtor_id = ?", debtor, current_user.id)
+			q2 = Iou.where("lender_id = ? and debtor_id = ?", current_user.id, debtor)
+			q = q1 + q2
+			result[debtor] = [User.find(q.lender).email, User.find(q.debtor).email, q.amt, q.description]
 		end
 		@detailedLoans = result
 	end

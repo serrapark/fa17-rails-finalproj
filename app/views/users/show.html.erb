@@ -1,26 +1,39 @@
-<div class="container">
-  <div class="col-lg-10">
 
-<h1> <%= current_user.email %>'s Dashboard </h1>
+  <div class="col-lg-12 centered">
+    <div class="col-lg-12">
 
-<br>
-<h4>
-	<u>Amount You Owe:</u>
-</h4>
-	$<%= @totalDebts %>
-	<br><br>
-	<%= link_to 'See Details', '/debts' %>
+      <div class="profile centered">
+        <div class="col-lg-10">
+          <h3>Welcome Back: <%= current_user.email %></h3>
+        </div>
+        <div class="col-lg-2">
+          <%= button_to "Add New Transaction", "/transaction/new", :class => "button profbutton", :method => :get %>
+        </div>
+      </div>
 
-<br><br>
-<h4>
-	<u>Amount Others Owe You:</u>
-</h4>
-	$<%= @totalLoans %>
-	<br><br>
-	<%= link_to 'See Details', '/loans' %>
+    </div>
 
-<br><br><br>
-<%= button_to "Add New Transaction", "/transaction/new", :class => "button medium", :method => :get %>
-
+    <div class="transactions col-lg-12">
+      <div class = "col-lg-6">
+        <div class= "IOU">
+        <h4>
+        	<u>Amount You Owe Others:</u>
+        </h4>
+        	$<%= @totalDebts %>
+        	<br><br>
+        	<%= link_to 'See Details', '/debts' %>
+        </div>
+      </div>
+      <div class = "col-lg-6">
+        <div class="UOM">
+        <h4>
+        	<u>Amount Others Owe You:</u>
+        </h4>
+        	$<%= @totalLoans %>
+        	<br><br>
+        	<%= link_to 'See Details', '/loans' %>
+        </div>
+      </div>
+      <br><br><br>
+    </div>
 	</div>
-</div>

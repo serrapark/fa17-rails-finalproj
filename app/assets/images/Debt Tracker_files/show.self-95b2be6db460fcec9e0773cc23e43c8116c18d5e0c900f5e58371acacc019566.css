@@ -1,0 +1,50 @@
+/* line 1, /Users/serra/ruby/fa17-rails-finalproj/app/assets/stylesheets/users/show.css.scss */
+.main {
+  background-color: white;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+/* line 6, /Users/serra/ruby/fa17-rails-finalproj/app/assets/stylesheets/users/show.css.scss */
+.profile-content {
+  padding: 1em;
+}
+
+/* line 10, /Users/serra/ruby/fa17-rails-finalproj/app/assets/stylesheets/users/show.css.scss */
+.profbutton {
+  background-color: #FFAF60;
+  font-family: "Barlow", sans-serif;
+  font-size: 1.5em;
+  padding: 1em;
+}
+
+/* line 17, /Users/serra/ruby/fa17-rails-finalproj/app/assets/stylesheets/users/show.css.scss */
+.profbutton:hover {
+  background-color: #FFAF70;
+}
+
+/* line 21, /Users/serra/ruby/fa17-rails-finalproj/app/assets/stylesheets/users/show.css.scss */
+.profile {
+  height: 150px;
+  margin: 1em 5em 1px 1em;
+}
+
+/* line 26, /Users/serra/ruby/fa17-rails-finalproj/app/assets/stylesheets/users/show.css.scss */
+.IOU, .UOM {
+  margin-top: 1em;
+  height: 500px;
+}
+
+/* line 31, /Users/serra/ruby/fa17-rails-finalproj/app/assets/stylesheets/users/show.css.scss */
+.profile, .IOU, .UOM {
+  /* basic */
+  background-color: #fff;
+  width: 100%;
+  padding: 1em;
+  text-align: center;
+  /* border-radius */
+  border-radius: 10px;
+  /* box-shadow */
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0px 0 5px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 0 5px;
+}

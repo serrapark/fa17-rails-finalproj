@@ -5,3 +5,18 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# Make Users
+%w(personA personB personC personD).each do |name|
+  User.create email: name+"@test.com", password: 'password'
+end
+
+# Make Ious
+Iou.create lender_id: User.all[0].id, debtor_id: User.all[1].id, amt: 5, description: "boba"
+Iou.create lender_id: User.all[0].id, debtor_id: User.all[1].id, amt: 5, description: "boba"
+Iou.create lender_id: User.all[0].id, debtor_id: User.all[1].id, amt: 5, description: "boba"
+Iou.create lender_id: User.all[0].id, debtor_id: User.all[1].id, amt: 5, description: "boba"
+Iou.create lender_id: User.all[0].id, debtor_id: User.all[1].id, amt: 5, description: "boba"
+Iou.create lender_id: User.all[0].id, debtor_id: User.all[1].id, amt: 5, description: "boba"
+Iou.create lender_id: User.all[0].id, debtor_id: User.all[1].id, amt: 5, description: "boba"
+Iou.create lender_id: User.all[0].id, debtor_id: User.all[1].id, amt: 5, description: "boba"
