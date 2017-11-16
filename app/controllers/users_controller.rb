@@ -20,6 +20,7 @@ class UsersController < ApplicationController
 	def show
 		@totalDebts = Iou.where(debtor_id: current_user.id).sum(:amt)
 		@totalLoans = Iou.where(lender_id: current_user.id).sum(:amt)
+		@user = current_user
 	end
 
 

@@ -15,23 +15,37 @@
 
     <div class="transactions col-lg-12">
       <div class = "col-lg-6">
-        <div class= "IOU">
+        <div class= "IOU-box">
         <h4>
         	<u>Amount You Owe Others:</u>
         </h4>
         	$<%= @totalDebts %>
         	<br><br>
-        	<%= link_to 'See Details', '/debts' %>
+          <% Iou.where(debtor_id: current_user.id).each do |IOU| %>
+            <div class="IOU">
+              <%= IOU.lender %>
+              <%= IOU.amt %>
+              <%= button_to "PAY", "/transaction/new", :class => "button profbutton", :method => :get %>
+            </div>
+          <% end %>
+        	<%= link_to 'See Past IOUs', '/debts' %>
         </div>
       </div>
       <div class = "col-lg-6">
-        <div class="UOM">
+        <div class="UOM-box">
         <h4>
         	<u>Amount Others Owe You:</u>
         </h4>
         	$<%= @totalLoans %>
         	<br><br>
-        	<%= link_to 'See Details', '/loans' %>
+          <% Iou.where(lender_id: current_user.id).each do |UOM| %>
+            <div class="UOM">
+              <%= UOM.debtor %>
+              <%= UOM.amt %>
+              <%= button_to "REMIND", "/transaction/new", :class => "button profbutton", :method => :get %>
+            </div>
+          <% end %>
+        	<%= link_to 'See Past UOMs', '/loans' %>
         </div>
       </div>
       <br><br><br>
