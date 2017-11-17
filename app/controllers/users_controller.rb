@@ -23,6 +23,12 @@ class UsersController < ApplicationController
 		@user = current_user
 	end
 
+	def send_reminder_mail
+		@user = User.find(params[:debtor])
+		ReminderMailer.reminder_email(@user).deliver
+		redirect_to '/'
+	end
+
 
 # debts page + loans page ----------------------------------------------
 

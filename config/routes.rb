@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   get '/transaction/new', to: 'ious#new'
   post '/transaction/new', to: 'ious#create'
 
+  get '/email', to: 'users#send_reminder_mail', as: :send_reminder_mail
+
 end
