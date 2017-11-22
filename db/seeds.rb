@@ -20,3 +20,4 @@ Iou.create lender_id: User.all[0].id, debtor_id: User.all[2].id, amt: 20, descri
 Iou.create lender_id: User.all[2].id, debtor_id: User.all[0].id, amt: 5, description: "iou6"
 Iou.create lender_id: User.all[1].id, debtor_id: User.all[3].id, amt: 1, description: "iou7"
 Iou.create lender_id: User.all[3].id, debtor_id: User.all[1].id, amt: 2, description: "iou8"
+Iou.create lender_id: User.all[5].id, debtor_id: User.all[1].id, amt: 20, description: "iou9"
