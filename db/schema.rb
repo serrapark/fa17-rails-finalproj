@@ -10,24 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171114225505) do
+ActiveRecord::Schema.define(version: 20171124122741) do
 
   create_table "completeds", force: :cascade do |t|
     t.integer "lender"
     t.integer "debtor"
-    t.integer "amt"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "description"
+    t.decimal "amt", precision: 8, scale: 2
   end
 
   create_table "ious", force: :cascade do |t|
     t.integer "lender_id"
     t.integer "debtor_id"
-    t.integer "amt"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "description"
+    t.decimal "amt", precision: 8, scale: 2
   end
 
   create_table "users", force: :cascade do |t|

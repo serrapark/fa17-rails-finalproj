@@ -19,12 +19,12 @@
         <h4>
         	<u>Amount You Owe Others:</u>
         </h4>
-        	$<%= @totalDebts %>
+        	<%= number_to_currency(@totalDebts) %>
         	<br><br>
           <% Iou.where(debtor_id: current_user.id).each do |iou| %>
             <div class="IOU">
-              <%= iou.lender %>
-              <%= iou.amt %>
+              <%= iou.lender.email %>
+              <%= number_to_currency(iou.amt) %>
               <%= button_to "PAY", "/transaction/new", :class => "button profbutton", :method => :get %>
             </div>
           <% end %>
@@ -36,12 +36,12 @@
         <h4>
         	<u>Amount Others Owe You:</u>
         </h4>
-        	$<%= @totalLoans %>
+        	<%= number_to_currency(@totalLoans) %>
         	<br><br>
           <% Iou.where(lender_id: current_user.id).each do |uom| %>
             <div class="UOM">
-              <%= uom.debtor %>
-              <%= uom.amt %>
+              <%= uom.debtor.email %>
+              <%= number_to_currency(uom.amt) %>
               <%= button_to "REMIND", send_reminder_mail_path, :class => "button profbutton", :method => :get, params: { debtor: uom.debtor} %>
             </div>
           <% end %>

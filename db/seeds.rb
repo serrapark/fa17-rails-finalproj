@@ -12,12 +12,11 @@
 end
 
 # Make Ious
-Iou.create lender_id: User.all[0].id, debtor_id: User.all[1].id, amt: 5, description: "iou1"
-Iou.create lender_id: User.all[1].id, debtor_id: User.all[2].id, amt: 10, description: "iou2"
-Iou.create lender_id: User.all[2].id, debtor_id: User.all[3].id, amt: 3, description: "iou3"
-Iou.create lender_id: User.all[3].id, debtor_id: User.all[0].id, amt: 4, description: "iou4"
-Iou.create lender_id: User.all[0].id, debtor_id: User.all[2].id, amt: 20, description: "iou5"
-Iou.create lender_id: User.all[2].id, debtor_id: User.all[0].id, amt: 5, description: "iou6"
-Iou.create lender_id: User.all[1].id, debtor_id: User.all[3].id, amt: 1, description: "iou7"
-Iou.create lender_id: User.all[3].id, debtor_id: User.all[1].id, amt: 2, description: "iou8"
-Iou.create lender_id: User.all[5].id, debtor_id: User.all[1].id, amt: 20, description: "iou9"
+Iou.create lender_id: User.all[0].id, debtor_id: User.all[1].id, amt: 5.00, description: "iou1"
+Iou.create lender_id: User.all[1].id, debtor_id: User.all[2].id, amt: 10.00, description: "iou2"
+Iou.create lender_id: User.all[2].id, debtor_id: User.all[3].id, amt: 3.00, description: "iou3"
+Iou.create lender_id: User.all[3].id, debtor_id: User.all[0].id, amt: 4.00, description: "iou4"
+Iou.create lender_id: User.all[0].id, debtor_id: User.all[2].id, amt: 20.00, description: "iou5"
+Iou.create lender_id: User.all[2].id, debtor_id: User.all[0].id, amt: 5.00, description: "iou6"
+Iou.create lender_id: User.all[1].id, debtor_id: User.all[3].id, amt: 1.00, description: "iou7"
+Iou.create lender_id: User.all[3].id, debtor_id: User.all[1].id, amt: 2.00, description: "iou8"
