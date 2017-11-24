@@ -2,7 +2,7 @@
 ​**Team Members:** Patricia Arenillo, Anahita Farshi, Serra Park  
 ​**Demo Link:** ---  
 
-​**Idea: **An application where users can track debts and loans between friends, remind and check off paid transactions.
+​**Idea:** An application where users can track debts and loans between friends, remind and check off paid transactions.
 
 ​**Models and Description:**  
 User  
