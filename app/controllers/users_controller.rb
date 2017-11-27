@@ -12,8 +12,8 @@ class UsersController < ApplicationController
 # 		@simplifiedLoans is how much the current_user lent each person if anything (person who owes you => amount they owe you)
 #
 # For detailed debts/loans page (idk if should be a separate page. whichever makes more sense / looks better. but these vars will be useful somehow)
-# 		@detailedDebts is all the ious between the current user and the people they owe money to (person you owe => [lender, debtor, amt, description])
-# 		@detailedLoans is all the ious between the current user and the people they lent money to (person who owes you => [lender, debtor, amt, description])
+# 		@detailedDebts is all the ious between the current user and the people they owe money to (person you owe => list of IOUs)
+# 		@detailedLoans is all the ious between the current user and the people they lent money to (person who owes you => list of IOUs)
 
 # home page / dashboard ------------------------------------------------
 
@@ -21,6 +21,10 @@ class UsersController < ApplicationController
 		@totalDebts = Iou.where(debtor_id: current_user.id).sum(:amt)
 		@totalLoans = Iou.where(lender_id: current_user.id).sum(:amt)
 		@user = current_user
+		@simplifiedDebts = debts()
+		@simplifiedLoans = loans()
+		@detailedDebts = detailed_debts()
+		@detailedLoans = detailed_loans()
 	end
 
 	def send_reminder_mail
@@ -36,7 +40,7 @@ class UsersController < ApplicationController
 	def debts
 		q = query()
 		q.delete_if {|key, value| value <= 0}
-		@simplifiedDebts = q
+		return q
 	end
 
 	# returns hash of user => amt they owe you
@@ -46,7 +50,7 @@ class UsersController < ApplicationController
 		q.each do |user, amt|
 			q[user] = -amt
 		end
-		@simplifiedLoans = q
+		return q
 	end
 
 	# helper to extract ious where you are the debtor and where you are the lender
@@ -130,10 +134,10 @@ class UsersController < ApplicationController
 			tmp = Array.new
 			q1 = Iou.where("lender_id = ? and debtor_id = ?", lender, current_user.id)
 			q2 = Iou.where("lender_id = ? and debtor_id = ?", current_user.id, lender)
-			q = q1 + q2
-			result[lender] = [User.find(q.lender).email, User.find(q.debtor).email, q.amt, q.description]
+			q = q1 | q2
+			result[lender] = q
 		end
-		@detailedDebts = result
+		return result
 	end
 
 	# returns person that owes you => list of ious between you and that person
@@ -152,12 +156,11 @@ class UsersController < ApplicationController
 			tmp = Array.new
 			q1 = Iou.where("lender_id = ? and debtor_id = ?", debtor, current_user.id)
 			q2 = Iou.where("lender_id = ? and debtor_id = ?", current_user.id, debtor)
-			q = q1 + q2
-			result[debtor] = [User.find(q.lender).email, User.find(q.debtor).email, q.amt, q.description]
+			q = q1 | q2
+			result[debtor] = q
 		end
-		@detailedLoans = result
+		return result
 	end
-
 end
 
 
