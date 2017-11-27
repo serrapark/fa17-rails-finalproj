@@ -1,7 +1,30 @@
-<%= simple_form_for @iou, :url => "/transaction/new" do |t| %>
-  <%= t.input :description, label: 'Description'%>
-  <%= t.input :amt, label: 'How much?'%>
-  <%= t.input :lender, label: 'Who paid?'%>
-  <%= t.input :debtor, label: 'Who was paid for?'%>
-  <%= t.button :submit %>
+<h1> New Transaction </h1>
+<hr>
+
+<%= form_tag("/transaction/new", method: "post") do %>
+
+    Enter a description:
+    <%= text_field_tag :description %>
+    <hr>
+
+    Enter an amount:
+    <%= number_field_tag :amt, nil, :step => "0.01" %>
+    <hr>
+
+    Select person who paid for this: </br>
+    <% User.all.each do |user| %>
+        <%= radio_button_tag :lender, user.id %>
+        <%= label_tag :lender, user.email %>
+    <% end %>
+    <hr>
+
+    Select person who was paid for: </br>
+    <% User.all.each do |user| %>
+        <%= radio_button_tag :debtor, user.id %>
+        <%= label_tag :debtor, user.email %>
+    <% end %>
+    <hr>
+
+    <%= submit_tag("Save") %>
+
 <% end %>

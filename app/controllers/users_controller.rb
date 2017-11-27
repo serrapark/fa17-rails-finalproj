@@ -157,4 +157,11 @@ class UsersController < ApplicationController
 		end
 		@detailedLoans = result
 	end
+
 end
+
+
+
+
+
+
