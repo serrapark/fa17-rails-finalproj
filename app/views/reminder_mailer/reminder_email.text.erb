@@ -1,4 +1,9 @@
-Welcome to example.com, <%= @user %>
+Welcome to example.com,
+<% if @user.username %>
+  <%= @user.username %>
+<% else %> 
+  <%= @user.email %>
+<% end %>
 ===============================================
  
 You have received a reminder from one of your friends.

@@ -34,6 +34,7 @@
             <% @simplifiedDebts.each do |user, amt| %>
               <%= user %>
               <%= number_to_currency(amt) %> <br>
+              <%= button_to "PAY", "/transaction/new", :class => "button profbutton", :method => :get %>
             <% end %>
           <% end %>
 
@@ -69,6 +70,7 @@
             <% @simplifiedLoans.each do |user, amt| %>
               <%= user %>
               <%= number_to_currency(amt) %><br>
+              <%= button_to "REMIND", send_reminder_mail_path, :class => "button profbutton", :method => :get, params: {debtor: user} %>
             <% end %>  
           <% end %>
 
