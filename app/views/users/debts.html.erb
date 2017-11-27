@@ -1,9 +1,17 @@
-<h1> <%= current_user.email %>'s Debts </h1>
+<h1> 
+	<% if current_user.username %>
+      <%= current_user.username %>
+    <% else %> 
+      <%= current_user.email %>
+    <% end %>'s Debts 
+</h1>
 
 <br>
-<% @simplifiedDebts.each do |lender, amt|%>
-	<%= lender %>
-	$<%= amt %>
+
+<% if @simplifiedDebts==nil %>
+<% else %>
+  <% @simplifiedDebts.each do |user, amt| %>
+    <%= user %>
+    <%= number_to_currency(amt) %> <br>
+  <% end %>
 <% end %>
-
-
