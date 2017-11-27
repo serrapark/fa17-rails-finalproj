@@ -4,7 +4,13 @@
 
       <div class="profile centered">
         <div class="col-lg-10">
-          <h3>Welcome Back: <%= current_user.email %></h3>
+          <h3>Welcome Back: 
+            <% if current_user.username %>
+            <%= current_user.username %>
+            <% else %> 
+            <%= current_user.email %>
+            <% end %>
+          </h3>
         </div>
         <div class="col-lg-2">
           <%= button_to "Add New Transaction", "/transaction/new", :class => "button profbutton", :method => :get %>
@@ -17,10 +23,10 @@
       <div class = "col-lg-6">
         <div class= "IOU-box">
         <h4>
-        	<u>Amount You Owe Others:</u>
+          <u>Amount You Owe Others:</u>
         </h4>
-        	<%= number_to_currency(@totalDebts) %>
-        	<br><br>
+          <%= number_to_currency(@totalDebts) %>
+          <br><br>
 
 
           <% if @simplifiedDebts==nil %>
@@ -45,16 +51,16 @@
           <% end %> <br>
 
 
-        	<%= link_to 'See Past IOUs', '/debts' %>
+          <%= link_to 'See Past IOUs', '/debts' %>
         </div>
       </div>
       <div class = "col-lg-6">
         <div class="UOM-box">
         <h4>
-        	<u>Amount Others Owe You:</u>
+          <u>Amount Others Owe You:</u>
         </h4>
-        	<%= number_to_currency(@totalLoans) %>
-        	<br><br>
+          <%= number_to_currency(@totalLoans) %>
+          <br><br>
 
 
 
@@ -80,9 +86,9 @@
           <% end %> <br>
 
 
-        	<%= link_to 'See Past UOMs', '/loans' %>
+          <%= link_to 'See Past UOMs', '/loans' %>
         </div>
       </div>
       <br><br><br>
     </div>
-	</div>
+  </div>
