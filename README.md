@@ -34,10 +34,11 @@ Completed Transaction
   - seed file
   - plain text information extracted from controller and forms with no styling for the User, Iou, Completed views
 
+- Anahita:
 
+  - reminder button that sends an email notification (Action Mailer)
+  - sign in/sign up with username
 
-
-- Anahita: ---
 - Serra: 
 
   - completed views
