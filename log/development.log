@@ -37006,3 +37006,984 @@ Processing by IousController#new as HTML
 Completed 200 OK in 108ms (Views: 103.2ms | ActiveRecord: 0.7ms)
 
 
+Started GET "/" for 127.0.0.1 at 2017-11-28 15:20:14 -0800
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT SUM("ious"."amt") FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 2]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT SUM("ious"."amt") FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 2]]
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 2]]
+  [1m[36mIou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 2]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 2]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 2]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 2]]
+  [1m[36mIou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 5 and debtor_id = 2)[0m
+  [1m[36mIou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 2 and debtor_id = 5)[0m
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 2]]
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  Rendered users/show.html.erb within layouts/application (26.5ms)
+  Rendered layouts/_navigation_links.html.erb (1.3ms)
+  Rendered layouts/_navigation.html.erb (4.8ms)
+  Rendered layouts/_messages.html.erb (0.6ms)
+Completed 200 OK in 1099ms (Views: 1032.0ms | ActiveRecord: 3.9ms)
+
+
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "completeds"[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "completeds" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "lender_id" integer, "debtor_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "description" varchar, "amt" decimal(8,2))[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "ious"[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE TABLE "ious" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "lender_id" integer, "debtor_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "description" varchar, "amt" decimal(8,2))[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "lender_id" integer, "debtor_id" integer, "username" varchar)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX "index_users_on_debtor_id" ON "users" ("debtor_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_debtor_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_debtor_id' AND type='index'
+[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_debtor_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_debtor_id' AND type='index'
+[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE  INDEX "index_users_on_lender_id" ON "users" ("lender_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_lender_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_lender_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_debtor_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_debtor_id' AND type='index'
+[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_lender_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_lender_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_debtor_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_debtor_id' AND type='index'
+[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_username" ON "users" ("username")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20171124124301)[0m
+  [1m[35m (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20171113054918),
+(20171113073214),
+(20171113073307),
+(20171113114006),
+(20171113114034),
+(20171114001227),
+(20171114001243),
+(20171114011236),
+(20171114225354),
+(20171114225505),
+(20171124122741);
+
+[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2017-11-28 23:20:32.533891"], ["updated_at", "2017-11-28 23:20:32.533891"]]
+  [1m[35m (2.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "completeds"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "completeds" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "lender_id" integer, "debtor_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "description" varchar, "amt" decimal(8,2))[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "ious"[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "ious" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "lender_id" integer, "debtor_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "description" varchar, "amt" decimal(8,2))[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "lender_id" integer, "debtor_id" integer, "username" varchar)[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE  INDEX "index_users_on_debtor_id" ON "users" ("debtor_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_debtor_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_debtor_id' AND type='index'
+[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_debtor_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_debtor_id' AND type='index'
+[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE  INDEX "index_users_on_lender_id" ON "users" ("lender_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_lender_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_lender_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_debtor_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_debtor_id' AND type='index'
+[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_lender_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_lender_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_debtor_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_debtor_id' AND type='index'
+[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_username" ON "users" ("username")[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20171124124301)[0m
+  [1m[35m (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20171113054918),
+(20171113073214),
+(20171113073307),
+(20171113114006),
+(20171113114034),
+(20171114001227),
+(20171114001243),
+(20171114011236),
+(20171114225354),
+(20171114225505),
+(20171124122741);
+
+[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2017-11-28 23:20:32.578630"], ["updated_at", "2017-11-28 23:20:32.578630"]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "persona@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "personA"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "personA"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "username") VALUES (?, ?, ?, ?, ?)[0m  [["email", "persona@test.com"], ["encrypted_password", "$2a$11$h0OnudJezh55GR9/JfaHI.ugWZcCImiw.z66b3.TG./yQVPVa76Um"], ["created_at", "2017-11-28 23:20:32.776290"], ["updated_at", "2017-11-28 23:20:32.776290"], ["username", "personA"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "personb@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "personB"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "personB"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "username") VALUES (?, ?, ?, ?, ?)[0m  [["email", "personb@test.com"], ["encrypted_password", "$2a$11$88CAVuHTGb41fUU.sCL.5.OFLGP4mLKAyGU0ykRaE4SANUtpDkZbe"], ["created_at", "2017-11-28 23:20:32.933837"], ["updated_at", "2017-11-28 23:20:32.933837"], ["username", "personB"]]
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "personc@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "personC"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "personC"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "username") VALUES (?, ?, ?, ?, ?)[0m  [["email", "personc@test.com"], ["encrypted_password", "$2a$11$yNyKMf7qQnSUsfDMMnKoAeWuvAJrgYgkWZ/bUqLYADSlkypaKSFP."], ["created_at", "2017-11-28 23:20:33.093603"], ["updated_at", "2017-11-28 23:20:33.093603"], ["username", "personC"]]
+  [1m[35m (2.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "persond@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "personD"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "personD"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "username") VALUES (?, ?, ?, ?, ?)[0m  [["email", "persond@test.com"], ["encrypted_password", "$2a$11$LD/5VkNZLGcv5N.J9OlpyOHn6mjLl3rvPE3.UYMm0S90dpVBb/.M2"], ["created_at", "2017-11-28 23:20:33.245221"], ["updated_at", "2017-11-28 23:20:33.245221"], ["username", "personD"]]
+  [1m[35m (2.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "persone@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "personE"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "personE"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "username") VALUES (?, ?, ?, ?, ?)[0m  [["email", "persone@test.com"], ["encrypted_password", "$2a$11$HBmQlkkM03URCkyoFh3HJO6bHbXBqhZVJye2TsLAnJCQXEq80cpNq"], ["created_at", "2017-11-28 23:20:33.396639"], ["updated_at", "2017-11-28 23:20:33.396639"], ["username", "personE"]]
+  [1m[35m (2.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "personf@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "personF"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "personF"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "username") VALUES (?, ?, ?, ?, ?)[0m  [["email", "personf@test.com"], ["encrypted_password", "$2a$11$q4IZfiA5Ihlz.6E8Z9OWguhG1JOCn7z/JTDBEhSP9uQzmUK.Eu1dW"], ["created_at", "2017-11-28 23:20:33.546489"], ["updated_at", "2017-11-28 23:20:33.546489"], ["username", "personF"]]
+  [1m[35m (1.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "ious" ("lender_id", "debtor_id", "created_at", "updated_at", "description", "amt") VALUES (?, ?, ?, ?, ?, ?)[0m  [["lender_id", 1], ["debtor_id", 2], ["created_at", "2017-11-28 23:20:33.604550"], ["updated_at", "2017-11-28 23:20:33.604550"], ["description", "iou1"], ["amt", 5.0]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "ious" ("lender_id", "debtor_id", "created_at", "updated_at", "description", "amt") VALUES (?, ?, ?, ?, ?, ?)[0m  [["lender_id", 2], ["debtor_id", 3], ["created_at", "2017-11-28 23:20:33.609896"], ["updated_at", "2017-11-28 23:20:33.609896"], ["description", "iou2"], ["amt", 10.0]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "ious" ("lender_id", "debtor_id", "created_at", "updated_at", "description", "amt") VALUES (?, ?, ?, ?, ?, ?)[0m  [["lender_id", 3], ["debtor_id", 4], ["created_at", "2017-11-28 23:20:33.615335"], ["updated_at", "2017-11-28 23:20:33.615335"], ["description", "iou3"], ["amt", 3.36]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "ious" ("lender_id", "debtor_id", "created_at", "updated_at", "description", "amt") VALUES (?, ?, ?, ?, ?, ?)[0m  [["lender_id", 4], ["debtor_id", 5], ["created_at", "2017-11-28 23:20:33.622494"], ["updated_at", "2017-11-28 23:20:33.622494"], ["description", "iou4"], ["amt", 4.1]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ious" ("lender_id", "debtor_id", "created_at", "updated_at", "description", "amt") VALUES (?, ?, ?, ?, ?, ?)[0m  [["lender_id", 5], ["debtor_id", 6], ["created_at", "2017-11-28 23:20:33.627877"], ["updated_at", "2017-11-28 23:20:33.627877"], ["description", "iou5"], ["amt", 20.0]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ious" ("lender_id", "debtor_id", "created_at", "updated_at", "description", "amt") VALUES (?, ?, ?, ?, ?, ?)[0m  [["lender_id", 1], ["debtor_id", 3], ["created_at", "2017-11-28 23:20:33.634263"], ["updated_at", "2017-11-28 23:20:33.634263"], ["description", "iou6"], ["amt", 5.0]]
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "ious" ("lender_id", "debtor_id", "created_at", "updated_at", "description", "amt") VALUES (?, ?, ?, ?, ?, ?)[0m  [["lender_id", 3], ["debtor_id", 5], ["created_at", "2017-11-28 23:20:33.640437"], ["updated_at", "2017-11-28 23:20:33.640437"], ["description", "iou7"], ["amt", 0.1]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "ious" ("lender_id", "debtor_id", "created_at", "updated_at", "description", "amt") VALUES (?, ?, ?, ?, ?, ?)[0m  [["lender_id", 5], ["debtor_id", 2], ["created_at", "2017-11-28 23:20:33.646403"], ["updated_at", "2017-11-28 23:20:33.646403"], ["description", "iou8"], ["amt", 2.0]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ious" ("lender_id", "debtor_id", "created_at", "updated_at", "description", "amt") VALUES (?, ?, ?, ?, ?, ?)[0m  [["lender_id", 2], ["debtor_id", 4], ["created_at", "2017-11-28 23:20:33.652097"], ["updated_at", "2017-11-28 23:20:33.652097"], ["description", "iou9"], ["amt", 5.0]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "ious" ("lender_id", "debtor_id", "created_at", "updated_at", "description", "amt") VALUES (?, ?, ?, ?, ?, ?)[0m  [["lender_id", 4], ["debtor_id", 6], ["created_at", "2017-11-28 23:20:33.664895"], ["updated_at", "2017-11-28 23:20:33.664895"], ["description", "iou10"], ["amt", 10.0]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ious" ("lender_id", "debtor_id", "created_at", "updated_at", "description", "amt") VALUES (?, ?, ?, ?, ?, ?)[0m  [["lender_id", 2], ["debtor_id", 1], ["created_at", "2017-11-28 23:20:33.675228"], ["updated_at", "2017-11-28 23:20:33.675228"], ["description", "iou11"], ["amt", 3.36]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "ious" ("lender_id", "debtor_id", "created_at", "updated_at", "description", "amt") VALUES (?, ?, ?, ?, ?, ?)[0m  [["lender_id", 3], ["debtor_id", 2], ["created_at", "2017-11-28 23:20:33.681147"], ["updated_at", "2017-11-28 23:20:33.681147"], ["description", "iou12"], ["amt", 4.1]]
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ious" ("lender_id", "debtor_id", "created_at", "updated_at", "description", "amt") VALUES (?, ?, ?, ?, ?, ?)[0m  [["lender_id", 4], ["debtor_id", 3], ["created_at", "2017-11-28 23:20:33.687322"], ["updated_at", "2017-11-28 23:20:33.687322"], ["description", "iou13"], ["amt", 20.0]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "ious" ("lender_id", "debtor_id", "created_at", "updated_at", "description", "amt") VALUES (?, ?, ?, ?, ?, ?)[0m  [["lender_id", 5], ["debtor_id", 4], ["created_at", "2017-11-28 23:20:33.692123"], ["updated_at", "2017-11-28 23:20:33.692123"], ["description", "iou14"], ["amt", 5.0]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "ious" ("lender_id", "debtor_id", "created_at", "updated_at", "description", "amt") VALUES (?, ?, ?, ?, ?, ?)[0m  [["lender_id", 6], ["debtor_id", 5], ["created_at", "2017-11-28 23:20:33.698930"], ["updated_at", "2017-11-28 23:20:33.698930"], ["description", "iou15"], ["amt", 0.1]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/" for 127.0.0.1 at 2017-11-28 15:21:00 -0800
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+Completed 401 Unauthorized in 41ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2017-11-28 15:21:00 -0800
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.7ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (19.1ms)
+  Rendered layouts/_navigation_links.html.erb (0.6ms)
+  Rendered layouts/_navigation.html.erb (2.9ms)
+  Rendered layouts/_messages.html.erb (0.7ms)
+Completed 200 OK in 460ms (Views: 457.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2017-11-28 15:21:41 -0800
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.8ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (17.1ms)
+  Rendered layouts/_navigation_links.html.erb (1.1ms)
+  Rendered layouts/_navigation.html.erb (8.5ms)
+  Rendered layouts/_messages.html.erb (0.7ms)
+Completed 200 OK in 314ms (Views: 312.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-11-28 15:21:50 -0800
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"OoEUFo9jakzteZlr5Sc75QZYkNnBTMEqebKRpciybn/76c+x9JPqhrE4MOzZGahxnTC6lu4nJQAj3sEmE1oFyg==", "user"=>{"username"=>"serrapark", "email"=>"serra.park@berkeley.edu", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "serra.park@berkeley.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "serrapark"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER(?) LIMIT ?[0m  [["username", "serrapark"], ["LIMIT", 1]]
+  [1m[35mSQL (2.0ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "username") VALUES (?, ?, ?, ?, ?)[0m  [["email", "serra.park@berkeley.edu"], ["encrypted_password", "$2a$11$dzq3ugob/ztSWNPw1vDPt.4qIr53H5udZVzJfJzZLPW8/8YccIt.u"], ["created_at", "2017-11-28 23:21:50.307707"], ["updated_at", "2017-11-28 23:21:50.307707"], ["username", "serrapark"]]
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.5ms)[0m  [1m[33mUPDATE "users" SET "sign_in_count" = ?, "current_sign_in_at" = ?, "last_sign_in_at" = ?, "current_sign_in_ip" = ?, "last_sign_in_ip" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["sign_in_count", 1], ["current_sign_in_at", "2017-11-28 23:21:50.313049"], ["last_sign_in_at", "2017-11-28 23:21:50.313049"], ["current_sign_in_ip", "127.0.0.1"], ["last_sign_in_ip", "127.0.0.1"], ["updated_at", "2017-11-28 23:21:50.313768"], ["id", 7]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 294ms (ActiveRecord: 6.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-11-28 15:21:50 -0800
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT SUM("ious"."amt") FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT SUM("ious"."amt") FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mIou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mIou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mCACHE Iou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (12.7ms)
+  Rendered layouts/_navigation_links.html.erb (0.9ms)
+  Rendered layouts/_navigation.html.erb (4.7ms)
+  Rendered layouts/_messages.html.erb (0.5ms)
+Completed 200 OK in 176ms (Views: 139.0ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/transaction/new" for 127.0.0.1 at 2017-11-28 15:21:55 -0800
+Processing by IousController#new as HTML
+  Rendering ious/new.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered ious/new.html.erb within layouts/application (3.7ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  Rendered layouts/_navigation_links.html.erb (3.5ms)
+  Rendered layouts/_navigation.html.erb (6.1ms)
+  Rendered layouts/_messages.html.erb (1.3ms)
+Completed 200 OK in 139ms (Views: 123.3ms | ActiveRecord: 1.6ms)
+
+
+Started POST "/transaction/new" for 127.0.0.1 at 2017-11-28 15:22:05 -0800
+Processing by IousController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"aGtpIHng2c4GdprCRQeH+WVXyuH4QdTSpjQJboxVBOKXKUnnb+qz4+V5XQ+fMq0LgkyrcVthw2fy3ceochOQdA==", "description"=>"Coffee", "amt"=>"5", "lender"=>"1", "debtor"=>"7", "commit"=>"Save"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "ious" ("lender_id", "debtor_id", "created_at", "updated_at", "description", "amt") VALUES (?, ?, ?, ?, ?, ?)[0m  [["lender_id", 1], ["debtor_id", 7], ["created_at", "2017-11-28 23:22:05.652877"], ["updated_at", "2017-11-28 23:22:05.652877"], ["description", "Coffee"], ["amt", 5.0]]
+  [1m[35m (1.6ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 34ms (ActiveRecord: 3.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-11-28 15:22:05 -0800
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT SUM("ious"."amt") FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT SUM("ious"."amt") FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mIou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mIou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 1 and debtor_id = 7)[0m
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 7 and debtor_id = 1)[0m
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered users/show.html.erb within layouts/application (10.1ms)
+  Rendered layouts/_navigation_links.html.erb (1.6ms)
+  Rendered layouts/_navigation.html.erb (9.0ms)
+  Rendered layouts/_messages.html.erb (0.7ms)
+Completed 200 OK in 167ms (Views: 148.9ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/transaction/new" for 127.0.0.1 at 2017-11-28 15:22:10 -0800
+Processing by IousController#new as HTML
+  Rendering ious/new.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered ious/new.html.erb within layouts/application (7.0ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  Rendered layouts/_navigation_links.html.erb (1.8ms)
+  Rendered layouts/_navigation.html.erb (4.3ms)
+  Rendered layouts/_messages.html.erb (0.6ms)
+Completed 200 OK in 128ms (Views: 120.2ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/transaction/new" for 127.0.0.1 at 2017-11-28 15:22:18 -0800
+Processing by IousController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ePOzZQgGrNQPCPnZO0oVmzMbBwzSblbLKnlHv8wqFZaHsZOiHgzG+ewHPhThfz9p1ABmnHFOQX5+kIl5MmyBAA==", "description"=>"Lunch", "amt"=>"10", "lender"=>"7", "debtor"=>"5", "commit"=>"Save"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ious" ("lender_id", "debtor_id", "created_at", "updated_at", "description", "amt") VALUES (?, ?, ?, ?, ?, ?)[0m  [["lender_id", 7], ["debtor_id", 5], ["created_at", "2017-11-28 23:22:18.323464"], ["updated_at", "2017-11-28 23:22:18.323464"], ["description", "Lunch"], ["amt", 10.0]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 33ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-11-28 15:22:18 -0800
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT SUM("ious"."amt") FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT SUM("ious"."amt") FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mIou Load (0.4ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE Iou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mIou Load (0.7ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 1 and debtor_id = 7)[0m
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 7 and debtor_id = 1)[0m
+  [1m[36mCACHE Iou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 5 and debtor_id = 7)[0m
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 7 and debtor_id = 5)[0m
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  Rendered users/show.html.erb within layouts/application (27.0ms)
+  Rendered layouts/_navigation_links.html.erb (0.8ms)
+  Rendered layouts/_navigation.html.erb (2.6ms)
+  Rendered layouts/_messages.html.erb (0.7ms)
+Completed 200 OK in 187ms (Views: 134.5ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/reminder?debtor=persone%40test.com" for 127.0.0.1 at 2017-11-28 15:22:25 -0800
+Processing by UsersController#send_reminder_mail as HTML
+  Parameters: {"debtor"=>"persone@test.com"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "persone@test.com"], ["LIMIT", 1]]
+  Rendering reminder_mailer/reminder_email.html.erb within layouts/mailer
+  Rendered reminder_mailer/reminder_email.html.erb within layouts/mailer (0.6ms)
+  Rendering reminder_mailer/reminder_email.text.erb within layouts/mailer
+  Rendered reminder_mailer/reminder_email.text.erb within layouts/mailer (0.4ms)
+ReminderMailer#reminder_email: processed outbound mail in 536.9ms
+Sent mail to persone@test.com (18.5ms)
+Date: Tue, 28 Nov 2017 15:22:25 -0800
+From: notifications@example.com
+To: persone@test.com
+Message-ID: <5a1defb1db93c_a65c3fce96998f148679@MacBook-Pro-7.local.mail>
+Subject: Reminder
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="--==_mimepart_5a1defb1d94d5_a65c3fce96998f148663a";
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+
+----==_mimepart_5a1defb1d94d5_a65c3fce96998f148663a
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hello personE,
+
+===============================================
+ 
+You have received a reminder from one of your friends.
+ 
+Thanks for using Debt Tracker and have a great day!
+
+----==_mimepart_5a1defb1d94d5_a65c3fce96998f148663a
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hello personE,</h1>
+    <p>
+      You have received a reminder from one of your friends %>.<br>
+    </p>
+    <p>Thanks for using Debt Tracker and have a great day!</p>
+  </body>
+</html>
+  </body>
+</html>
+
+----==_mimepart_5a1defb1d94d5_a65c3fce96998f148663a--
+
+Redirected to http://localhost:3000/
+Completed 302 Found in 833ms (ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-11-28 15:22:25 -0800
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT SUM("ious"."amt") FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT SUM("ious"."amt") FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mIou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mIou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE Iou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mIou Load (0.3ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 1 and debtor_id = 7)[0m
+  [1m[36mIou Load (0.4ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 7 and debtor_id = 1)[0m
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 5 and debtor_id = 7)[0m
+  [1m[36mIou Load (0.3ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 7 and debtor_id = 5)[0m
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  Rendered users/show.html.erb within layouts/application (25.6ms)
+  Rendered layouts/_navigation_links.html.erb (0.7ms)
+  Rendered layouts/_navigation.html.erb (3.2ms)
+  Rendered layouts/_messages.html.erb (1.3ms)
+Completed 200 OK in 181ms (Views: 135.9ms | ActiveRecord: 3.9ms)
+
+
+Started GET "/transaction/complete?debtor=5" for 127.0.0.1 at 2017-11-28 15:22:31 -0800
+Processing by CompletedsController#move as HTML
+  Parameters: {"debtor"=>"5"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mIou Load (0.9ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ? AND "ious"."lender_id" = ?[0m  [["debtor_id", 5], ["lender_id", 7]]
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ? AND "ious"."lender_id" = ?[0m  [["debtor_id", 7], ["lender_id", 5]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "completeds" ("lender_id", "debtor_id", "created_at", "updated_at", "description", "amt") VALUES (?, ?, ?, ?, ?, ?)[0m  [["lender_id", 7], ["debtor_id", 5], ["created_at", "2017-11-28 23:22:31.109859"], ["updated_at", "2017-11-28 23:22:31.109859"], ["description", "Lunch"], ["amt", 10.0]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[31mDELETE FROM "ious" WHERE "ious"."id" = ?[0m  [["id", 17]]
+  [1m[35m (1.8ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 38ms (ActiveRecord: 6.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-11-28 15:22:31 -0800
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT SUM("ious"."amt") FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT SUM("ious"."amt") FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mIou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mIou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Iou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 1 and debtor_id = 7)[0m
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 7 and debtor_id = 1)[0m
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered users/show.html.erb within layouts/application (4.8ms)
+  Rendered layouts/_navigation_links.html.erb (0.9ms)
+  Rendered layouts/_navigation.html.erb (2.6ms)
+  Rendered layouts/_messages.html.erb (2.0ms)
+Completed 200 OK in 124ms (Views: 93.1ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/transaction/complete/loans" for 127.0.0.1 at 2017-11-28 15:22:34 -0800
+Processing by CompletedsController#show_loans as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering completeds/show_loans.html.erb within layouts/application
+  [1m[36mCompleted Load (0.3ms)[0m  [1m[34mSELECT "completeds".* FROM "completeds" WHERE "completeds"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  Rendered completeds/show_loans.html.erb within layouts/application (4.5ms)
+  Rendered layouts/_navigation_links.html.erb (0.8ms)
+  Rendered layouts/_navigation.html.erb (3.8ms)
+  Rendered layouts/_messages.html.erb (0.6ms)
+Completed 200 OK in 164ms (Views: 159.0ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2017-11-28 15:22:39 -0800
+Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering devise/registrations/edit.html.erb within layouts/application
+  Rendered devise/registrations/edit.html.erb within layouts/application (6.3ms)
+  Rendered layouts/_navigation_links.html.erb (0.9ms)
+  Rendered layouts/_navigation.html.erb (3.5ms)
+  Rendered layouts/_messages.html.erb (1.5ms)
+Completed 200 OK in 147ms (Views: 144.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/transaction/complete/loans" for 127.0.0.1 at 2017-11-28 15:22:44 -0800
+Processing by CompletedsController#show_loans as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering completeds/show_loans.html.erb within layouts/application
+  [1m[36mCompleted Load (0.2ms)[0m  [1m[34mSELECT "completeds".* FROM "completeds" WHERE "completeds"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  Rendered completeds/show_loans.html.erb within layouts/application (3.9ms)
+  Rendered layouts/_navigation_links.html.erb (1.0ms)
+  Rendered layouts/_navigation.html.erb (4.3ms)
+  Rendered layouts/_messages.html.erb (0.7ms)
+Completed 200 OK in 214ms (Views: 208.3ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-11-28 15:22:45 -0800
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT SUM("ious"."amt") FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT SUM("ious"."amt") FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 1 and debtor_id = 7)[0m
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 7 and debtor_id = 1)[0m
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered users/show.html.erb within layouts/application (27.6ms)
+  Rendered layouts/_navigation_links.html.erb (1.1ms)
+  Rendered layouts/_navigation.html.erb (3.7ms)
+  Rendered layouts/_messages.html.erb (0.6ms)
+Completed 200 OK in 259ms (Views: 117.4ms | ActiveRecord: 2.1ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2017-11-28 15:22:50 -0800
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"Gpynl0/ACVtOTqtAAA5fA33N3tqtxVESQOVzGbwqoMnl3odQWcpjdq1BbI3aO3Xxmta/Sg7lRqcUDL3fQmw0Xw=="}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 14ms (ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-11-28 15:22:50 -0800
+Processing by UsersController#show as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2017-11-28 15:22:50 -0800
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.3ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (5.6ms)
+  Rendered layouts/_navigation_links.html.erb (1.0ms)
+  Rendered layouts/_navigation.html.erb (3.7ms)
+  Rendered layouts/_messages.html.erb (0.7ms)
+Completed 200 OK in 103ms (Views: 101.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2017-11-28 15:38:27 -0800
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"zpW51YO9duNk5hNud+HJ8+QaNCAr8QlxDQqSALr/2pnvmxmCpOlsir8UZ5MsUEw5oE7+BWeFd+suRRzz9QIIww==", "user"=>{"login"=>"serra.park@berkeley.edu", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (3.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE (lower(username) = 'serra.park@berkeley.edu' OR lower(email) = 'serra.park@berkeley.edu') ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (3.6ms)[0m  [1m[33mUPDATE "users" SET "current_sign_in_at" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["current_sign_in_at", "2017-11-28 23:38:27.768457"], ["sign_in_count", 2], ["updated_at", "2017-11-28 23:38:27.772125"], ["id", 7]]
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 225ms (ActiveRecord: 8.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-11-28 15:38:27 -0800
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT SUM("ious"."amt") FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT SUM("ious"."amt") FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mIou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mIou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 1 and debtor_id = 7)[0m
+  [1m[36mIou Load (1.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 7 and debtor_id = 1)[0m
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered users/show.html.erb within layouts/application (10.1ms)
+  Rendered layouts/_navigation_links.html.erb (1.3ms)
+  Rendered layouts/_navigation.html.erb (12.1ms)
+  Rendered layouts/_messages.html.erb (0.9ms)
+Completed 200 OK in 168ms (Views: 148.3ms | ActiveRecord: 3.7ms)
+
+
+Started GET "/transaction/new" for 127.0.0.1 at 2017-11-28 15:38:33 -0800
+Processing by IousController#new as HTML
+  Rendering ious/new.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered ious/new.html.erb within layouts/application (7.4ms)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  Rendered layouts/_navigation_links.html.erb (2.3ms)
+  Rendered layouts/_navigation.html.erb (3.9ms)
+  Rendered layouts/_messages.html.erb (0.5ms)
+Completed 200 OK in 116ms (Views: 111.6ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/transaction/new" for 127.0.0.1 at 2017-11-28 15:38:43 -0800
+Processing by IousController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uQ5kLsuddjE5os43sJC8gMJ+NI/y7fTMdWOQRxcuMK5qRU2v97JiOQySJ1F7sxXvtly7/+zpQprZJkyDBLo/EQ==", "description"=>"Coffee", "amt"=>"5", "lender"=>"7", "debtor"=>"5", "commit"=>"Save"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ious" ("lender_id", "debtor_id", "created_at", "updated_at", "description", "amt") VALUES (?, ?, ?, ?, ?, ?)[0m  [["lender_id", 7], ["debtor_id", 5], ["created_at", "2017-11-28 23:38:43.703273"], ["updated_at", "2017-11-28 23:38:43.703273"], ["description", "Coffee"], ["amt", 5.0]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 12ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-11-28 15:38:43 -0800
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT SUM("ious"."amt") FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT SUM("ious"."amt") FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mIou Load (0.3ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mIou Load (0.3ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 1 and debtor_id = 7)[0m
+  [1m[36mIou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 7 and debtor_id = 1)[0m
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mIou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 5 and debtor_id = 7)[0m
+  [1m[36mIou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 7 and debtor_id = 5)[0m
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  Rendered users/show.html.erb within layouts/application (10.3ms)
+  Rendered layouts/_navigation_links.html.erb (2.4ms)
+  Rendered layouts/_navigation.html.erb (4.8ms)
+  Rendered layouts/_messages.html.erb (0.8ms)
+Completed 200 OK in 110ms (Views: 93.7ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/transaction/new" for 127.0.0.1 at 2017-11-28 15:39:16 -0800
+Processing by IousController#new as HTML
+  Rendering ious/new.html.erb within layouts/application
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mCACHE User Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered ious/new.html.erb within layouts/application (14.0ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  Rendered layouts/_navigation_links.html.erb (6.8ms)
+  Rendered layouts/_navigation.html.erb (11.6ms)
+  Rendered layouts/_messages.html.erb (0.9ms)
+Completed 200 OK in 334ms (Views: 324.4ms | ActiveRecord: 2.6ms)
+
+
+Started POST "/transaction/new" for 127.0.0.1 at 2017-11-28 15:39:33 -0800
+Processing by IousController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"WlHITmJ2Dnv2cnmu8VIbm1MWsj2WEH25g8IYirBd8/+JGuHPXlkac8NCkMg6cbL0JzQ9TYgUy+8vh8ROo8n8QA==", "description"=>"Food", "amt"=>"10", "lender"=>"5", "debtor"=>"7", "commit"=>"Save"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ious" ("lender_id", "debtor_id", "created_at", "updated_at", "description", "amt") VALUES (?, ?, ?, ?, ?, ?)[0m  [["lender_id", 5], ["debtor_id", 7], ["created_at", "2017-11-28 23:39:33.645770"], ["updated_at", "2017-11-28 23:39:33.645770"], ["description", "Food"], ["amt", 10.0]]
+  [1m[35m (1.6ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 10ms (ActiveRecord: 2.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-11-28 15:39:33 -0800
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT SUM("ious"."amt") FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT SUM("ious"."amt") FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mIou Load (0.1ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."debtor_id" = ?[0m  [["debtor_id", 7]]
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 1 and debtor_id = 7)[0m
+  [1m[36mIou Load (0.2ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 7 and debtor_id = 1)[0m
+  [1m[36mIou Load (0.5ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 5 and debtor_id = 7)[0m
+  [1m[36mIou Load (0.3ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 7 and debtor_id = 5)[0m
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE "ious"."lender_id" = ?[0m  [["lender_id", 7]]
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 5 and debtor_id = 7)[0m
+  [1m[36mCACHE Iou Load (0.0ms)[0m  [1m[34mSELECT "ious".* FROM "ious" WHERE (lender_id = 7 and debtor_id = 5)[0m
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  Rendered users/show.html.erb within layouts/application (14.4ms)
+  Rendered layouts/_navigation_links.html.erb (1.5ms)
+  Rendered layouts/_navigation.html.erb (5.0ms)
+  Rendered layouts/_messages.html.erb (0.8ms)
+Completed 200 OK in 157ms (Views: 130.4ms | ActiveRecord: 3.5ms)
+
+
