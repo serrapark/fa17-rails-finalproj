@@ -1,6 +1,6 @@
 ​**Title:** Debt Tracker  
 ​**Team Members:** Patricia Arenillo, Anahita Farshi, Serra Park  
-​**Demo Link:** ---  
+​**Demo Link:** https://youtu.be/pbJUCjRS9W8
 
 ​**Idea:** An application where users can track debts and loans between friends, remind and check off paid transactions.
 
@@ -34,10 +34,11 @@ Completed Transaction
   - seed file
   - plain text information extracted from controller and forms with no styling for the User, Iou, Completed views
 
+- Anahita:
 
+  - reminder button that sends an email notification (Action Mailer)
+  - sign in/sign up with username
 
-
-- Anahita: ---
 - Serra:
 
   - completed views
