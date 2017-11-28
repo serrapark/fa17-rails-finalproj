@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   get '/transaction/new', to: 'ious#new'
   post '/transaction/new', to: 'ious#create'
 
+  get '/transaction/complete/', to: 'completeds#move'
+  get '/transaction/complete/debts', to: 'completeds#show_debts'
+  get '/transaction/complete/loans', to: 'completeds#show_loans'
+
   get '/reminder', to: 'users#send_reminder_mail', as: :send_reminder_mail
 
 end

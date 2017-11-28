@@ -22,21 +22,21 @@
           <u>Amount You Owe Others:</u>
         </h4>
           <%= number_to_currency(@totalDebts) %>
-          <br><br>
+          <br> <br>
 
 
           <% if @simplifiedDebts==nil %>
           <% else %>
             <% @simplifiedDebts.each do |user, amt| %>
-              <%= user %>
+              <%= User.find(user).username %>
               <%= number_to_currency(amt) %> <br>
             <% end %>
           <% end %>
 
-          <br> <br> Above is the simplified amounts for each person you owe. Below is the individual transactions that make up each of the simplified amounts <br> <br>
+          <hr> Above is the simplified amounts for each person you owe. Below is the individual transactions that make up each of the simplified amounts <hr>
 
           <% User.all.each do |u| %>
-              <% if u.id != current_user.id and @detailedDebts.key?(u.id) and @simplifiedDebts.key?(u.username)%>
+              <% if u.id != current_user.id and @detailedDebts.key?(u.id) and @simplifiedDebts.key?(u.id)%>
                   <u>Between you and <%= u.username %>:</u> <br>
                   <% @detailedDebts[u.id].each do |iou| %>
                     <%= User.find(iou.debtor_id).username %> -> <%= User.find(iou.lender_id).username %> <br>
@@ -47,7 +47,7 @@
           <% end %> <br>
 
 
-          <%= link_to 'See Past IOUs', '/debts' %>
+          <%= link_to 'See Past IOUs', '/transaction/complete/debts' %>
         </div>
       </div>
       <div class = "col-lg-6">
@@ -56,23 +56,24 @@
           <u>Amount Others Owe You:</u>
         </h4>
           <%= number_to_currency(@totalLoans) %>
-          <br><br>
+          <br> <br>
 
 
 
           <% if @simplifiedLoans==nil %>
           <% else %>
             <% @simplifiedLoans.each do |user, amt| %>
-              <%= user %>
-              <%= number_to_currency(amt) %><br>
-              <%= button_to "REMIND", send_reminder_mail_path, :class => "button profbutton", :method => :get, params: {debtor: user} %>
+              <%= User.find(user).username %>
+              <%= number_to_currency(amt) %>
+              <%= button_to "REMIND", send_reminder_mail_path, :class => "button profbutton", :method => :get, params: {debtor: User.find(user).email} %>
+              <%= button_to "Paid off?", "transaction/complete", :class => "button profbutton", :method => :get, params: {debtor: user} %>
             <% end %>  
           <% end %>
 
-          <br> <br> Above is the simplified amounts for each person that owes you. Below is the individual transactions that make up each of the simplified amounts <br> <br>
+          <hr>Above is the simplified amounts for each person that owes you. Below is the individual transactions that make up each of the simplified amounts <hr>
 
           <% User.all.each do |u| %>
-              <% if u.id != current_user.id and @detailedLoans.key?(u.id) and @simplifiedLoans.key?(u.username)%>
+              <% if u.id != current_user.id and @detailedLoans.key?(u.id) and @simplifiedLoans.key?(u.id)%>
                   <u>Between you and <%= u.username %>:</u> <br>
                   <% @detailedLoans[u.id].each do |iou| %>
                     <%= User.find(iou.debtor_id).username %> -> <%= User.find(iou.lender_id).username %> <br>
@@ -83,7 +84,7 @@
           <% end %> <br>
 
 
-          <%= link_to 'See Past UOMs', '/loans' %>
+          <%= link_to 'See Past UOMs', '/transaction/complete/loans' %>
         </div>
       </div>
       <br><br><br>

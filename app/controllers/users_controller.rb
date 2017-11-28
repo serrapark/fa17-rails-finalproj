@@ -27,7 +27,7 @@ class UsersController < ApplicationController
 		@detailedLoans = detailed_loans()
 	end
 
-# email notifications ------------------------------------------------
+# email notifications -------------------------------------------------
 
 	def send_reminder_mail
 		@user = User.find_for_authentication(:email => params[:debtor])
@@ -98,11 +98,11 @@ class UsersController < ApplicationController
 			if (loans.keys.include?(lender))
 				amt_due = loans[lender]
 				diff = amt_owed - amt_due
-				result[User.find(lender).username] = diff
+				result[User.find(lender).id] = diff
 
 			# if you owe this person and this person doesn't owe you
 			else
-				result[User.find(lender).username] = amt_owed
+				result[User.find(lender).id] = amt_owed
 			end
 
 		end
@@ -110,7 +110,7 @@ class UsersController < ApplicationController
 
 			# if the person owes you but you don't owe them
 			if (not debts.keys.include?(debtor))
-				result[User.find(debtor).username] = -amt_due
+				result[User.find(debtor).id] = -amt_due
 			end
 
 		end
