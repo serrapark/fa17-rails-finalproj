@@ -73,8 +73,8 @@
                   <%= User.find(user).username %>
                   <%= number_to_currency(amt) %>
                   <div class="btn-group" role="group">
-                    <%= link_to "REMIND", send_reminder_mail_path, :class => "btn uombtn", :method => :get, params: {debtor: User.find(user).email} %>
-                    <%= link_to "Paid off?", "transaction/complete", :class => "btn uombtn", :method => :get, params: {debtor: user} %>
+                    <%= button_to "REMIND", send_reminder_mail_path, :class => "btn uombtn", :method => :get, params: {debtor: User.find(user).email} %>
+                    <%= button_to "Paid off?", "transaction/complete", :class => "btn uombtn", :method => :get, params: {debtor: user} %>
                   </div>
                 </h4>
               <div>
