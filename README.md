@@ -38,4 +38,7 @@ Completed Transaction
 
 
 - Anahita: ---
-- Serra: ---
+- Serra: 
+
+  - completed views
+  - general styling for application
