@@ -1,0 +1,25 @@
+.completedcard {
+  width: 20em;
+  background-color: rgba(255,165,0, 0.1);
+  margin: 2em;
+  margin-left: 23em;
+  padding: 1em;
+  border-radius: 10px;
+
+}
+
+.completedheader {
+  margin-left: 11em;
+}
+
+.completed {
+  width: 1000px;
+  overflow-y: scroll;
+  text-align: center;
+  margin-left: 11em;
+  margin-top: 1em;
+  padding: 2em;
+  height: 45em;
+  background-color: white;
+  border-radius: 10px;
+}

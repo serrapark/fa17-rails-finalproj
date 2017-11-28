@@ -1,7 +1,12 @@
+<div class="completedheader">
 <h1> <%= current_user.username %>'s Paid Back Loans </h1>
-
-<% @q.each do |completed| %>
-    <%= User.find(completed.debtor_id).username %>
-    <%= number_to_currency(completed.amt) %>
-    <%= completed.description %> <br>
-<% end %>
+</div>
+<div class = "completed col-md-9 centered">
+  <% @q.each do |completed| %>
+    <div class= "completedcard">
+      <h3><%= User.find(completed.debtor_id).username %>,
+      <%= number_to_currency(completed.amt) %></h3>
+      <h4>Description: <%= completed.description %></h4>
+    </div>
+  <% end %>
+</div>
