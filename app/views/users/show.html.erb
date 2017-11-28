@@ -4,7 +4,7 @@
 
       <div class="profile centered">
         <div class="col-lg-10">
-          <h3>Welcome Back: 
+          <h3>Welcome Back:
             <%= current_user.username %>
           </h3>
         </div>
@@ -24,30 +24,36 @@
           <%= number_to_currency(@totalDebts) %>
           <br> <br>
 
-
+          <div class="IOU-contents">
           <% if @simplifiedDebts==nil %>
           <% else %>
+
             <% @simplifiedDebts.each do |user, amt| %>
-              <%= User.find(user).username %>
-              <%= number_to_currency(amt) %> <br>
-            <% end %>
-          <% end %>
-
-          <hr> Above is the simplified amounts for each person you owe. Below is the individual transactions that make up each of the simplified amounts <hr>
-
-          <% User.all.each do |u| %>
-              <% if u.id != current_user.id and @detailedDebts.key?(u.id) and @simplifiedDebts.key?(u.id)%>
-                  <u>Between you and <%= u.username %>:</u> <br>
-                  <% @detailedDebts[u.id].each do |iou| %>
-                    <%= User.find(iou.debtor_id).username %> -> <%= User.find(iou.lender_id).username %> <br>
-                    <%= iou.description %>
-                    <%= number_to_currency(iou.amt) %> <br>
+              <div class="simplified card">
+                <div class="card-header" role="tab" id="headingOne">
+                  <h4 class="mb-0">
+                      <%= User.find(user).username %>
+                      <%= number_to_currency(amt) %>
+                  </h2>
+                </div>
+                <div>
+                  <% @detailedDebts[user].each do |iou| %>
+                    <div class = "transactioncard">
+                      <%= User.find(iou.debtor_id).username %> -> <%= User.find(iou.lender_id).username %> <br>
+                      <%= iou.description %>
+                      <%= number_to_currency(iou.amt) %>
+                    </div>
                   <% end %>
-              <% end %>
-          <% end %> <br>
+                </div>
+              </div>
 
+            <% end %>
+
+          <% end %>
+        </div>
 
           <%= link_to 'See Past IOUs', '/transaction/complete/debts' %>
+
         </div>
       </div>
       <div class = "col-lg-6">
@@ -58,32 +64,32 @@
           <%= number_to_currency(@totalLoans) %>
           <br> <br>
 
-
-
+        <div class="UOM-contents">
           <% if @simplifiedLoans==nil %>
           <% else %>
             <% @simplifiedLoans.each do |user, amt| %>
-              <%= User.find(user).username %>
-              <%= number_to_currency(amt) %>
-              <%= button_to "REMIND", send_reminder_mail_path, :class => "button profbutton", :method => :get, params: {debtor: User.find(user).email} %>
-              <%= button_to "Paid off?", "transaction/complete", :class => "button profbutton", :method => :get, params: {debtor: user} %>
-            <% end %>  
-          <% end %>
-
-          <hr>Above is the simplified amounts for each person that owes you. Below is the individual transactions that make up each of the simplified amounts <hr>
-
-          <% User.all.each do |u| %>
-              <% if u.id != current_user.id and @detailedLoans.key?(u.id) and @simplifiedLoans.key?(u.id)%>
-                  <u>Between you and <%= u.username %>:</u> <br>
-                  <% @detailedLoans[u.id].each do |iou| %>
+              <div class="simplified">
+                <h4 class="mb-0">
+                  <%= User.find(user).username %>
+                  <%= number_to_currency(amt) %>
+                  <div class="btn-group" role="group">
+                    <%= link_to "REMIND", send_reminder_mail_path, :class => "btn uombtn", :method => :get, params: {debtor: User.find(user).email} %>
+                    <%= link_to "Paid off?", "transaction/complete", :class => "btn uombtn", :method => :get, params: {debtor: user} %>
+                  </div>
+                </h4>
+              <div>
+                <% @detailedLoans[user].each do |iou| %>
+                  <div class = "transactioncard">
                     <%= User.find(iou.debtor_id).username %> -> <%= User.find(iou.lender_id).username %> <br>
                     <%= iou.description %>
-                    <%= number_to_currency(iou.amt) %> <br>
-                  <% end %>
-              <% end %>
-          <% end %> <br>
-
-
+                    <%= number_to_currency(iou.amt) %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <% end %>
+          <% end %>
+        </div>
           <%= link_to 'See Past UOMs', '/transaction/complete/loans' %>
         </div>
       </div>

@@ -12,6 +12,22 @@
   margin-top: 1em;
 }
 
+.uombtn {
+  width: 100px;
+  background-color: #FFAF60;
+  border-radius: 40px;
+  font-family: "Barlow", sans-serif;
+  font-size: 1.3em;
+  margin-left: 5px;
+  margin-right: 5px;
+  display: inline;
+
+  div {
+    display: inline;
+  }
+
+}
+
 .profile {
   padding: 1em;
 }
@@ -19,7 +35,7 @@
 .IOU-box, .UOM-box {
   margin-bottom: 2em;
   margin-top: 1em;
-  height: 45em;
+  height: 43em;
   background-color: #fff;
   width: 100%;
   padding: 1em;
@@ -30,4 +46,28 @@
   -webkit-box-shadow: rgba(0,0,0,0.8) 0px 0 5px;
   -moz-box-shadow: rgba(0,0,0,0.8) 0 0 5px;
   box-shadow: rgba(0,0,0,0.8) 0 0 5px;
+}
+
+.IOU-contents, .UOM-contents {
+  height: 32em;
+  overflow-y: scroll;
+  margin: 1em;
+}
+
+#accordion {
+  height: 32em;
+  overflow-y: scroll;
+}
+
+.transactioncard {
+  background-color: rgba(255,165,0, 0.1);
+  margin: 1em;
+  padding: .5em;
+}
+
+.simplified {
+  margin: 1em;
+  padding: 1em;
+  border: 1px solid #F1DB84;
+  border-radius: 10px;
 }
