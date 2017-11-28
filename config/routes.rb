@@ -5,9 +5,6 @@ Rails.application.routes.draw do
   root to: "users#show"
   resources :users
 
-  get '/debts', to: 'users#debts'
-  get '/loans', to: 'users#loans'
-
   get '/transaction/new', to: 'ious#new'
   post '/transaction/new', to: 'ious#create'
 

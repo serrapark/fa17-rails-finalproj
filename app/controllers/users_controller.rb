@@ -15,6 +15,7 @@ class UsersController < ApplicationController
 # 		@detailedDebts is all the ious between the current user and the people they owe money to (person you owe => list of IOUs)
 # 		@detailedLoans is all the ious between the current user and the people they lent money to (person who owes you => list of IOUs)
 
+
 # home page / dashboard ------------------------------------------------
 
 	def show
@@ -35,7 +36,7 @@ class UsersController < ApplicationController
 		redirect_to '/'
 	end
 
-# debts page + loans page ----------------------------------------------
+# helpers for simplified debts/loans -----------------------------------
 
 	# returns hash of user => amt you owe them
 	def debts
@@ -117,7 +118,7 @@ class UsersController < ApplicationController
 		return result
 	end
 
-# detailed debts page + detailed loans page ----------------------------
+# helper for detailed debts/loans --------------------------------------
 
 	# returns person you owe => list of ious between you and that person
 	def detailed_debts
