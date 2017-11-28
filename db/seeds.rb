@@ -8,7 +8,7 @@
 
 # Make Users
 %w(personA personB personC personD personE personF).each do |name|
-  User.create email: name+"@test.com", password: 'password'
+  User.create username: name, email: name+"@test.com", password: 'password'
 end
 
 # Make Ious

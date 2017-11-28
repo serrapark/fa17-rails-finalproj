@@ -105,11 +105,11 @@ class UsersController < ApplicationController
 			if (loans.keys.include?(lender))
 				amt_due = loans[lender]
 				diff = amt_owed - amt_due
-				result[User.find(lender).email] = diff
+				result[User.find(lender).username] = diff
 
 			# if you owe this person and this person doesn't owe you
 			else
-				result[User.find(lender).email] = amt_owed
+				result[User.find(lender).username] = amt_owed
 			end
 
 		end
@@ -117,7 +117,7 @@ class UsersController < ApplicationController
 
 			# if the person owes you but you don't owe them
 			if (not debts.keys.include?(debtor))
-				result[User.find(debtor).email] = -amt_due
+				result[User.find(debtor).username] = -amt_due
 			end
 
 		end
