@@ -27,9 +27,17 @@ class UsersController < ApplicationController
 		@detailedLoans = detailed_loans()
 	end
 
+# email notifications ------------------------------------------------
+
 	def send_reminder_mail
 		@user = User.find_for_authentication(:email => params[:debtor])
 		ReminderMailer.reminder_email(@user).deliver
+		redirect_to '/'
+	end
+
+	def send_paid_mail
+		@user = User.find(params[:debtor])
+		ReminderMailer.paid_email(@user).deliver
 		redirect_to '/'
 	end
 
