@@ -4,13 +4,7 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hello, 
-      <% if @user.username %>
-        <%= @user.username %>
-      <% else %> 
-        <%= @user.email %>
-      <% end %>
-    </h1>
+    <h1>Hello <%= @user.username %>,</h1>
     <p>
       You have received a reminder from one of your friends %>.<br>
     </p>
