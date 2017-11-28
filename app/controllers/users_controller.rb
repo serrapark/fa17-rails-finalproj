@@ -35,13 +35,6 @@ class UsersController < ApplicationController
 		redirect_to '/'
 	end
 
-	def send_paid_mail
-		@user = User.find(params[:debtor])
-		ReminderMailer.paid_email(@user).deliver
-		redirect_to '/'
-	end
-
-
 # debts page + loans page ----------------------------------------------
 
 	# returns hash of user => amt you owe them

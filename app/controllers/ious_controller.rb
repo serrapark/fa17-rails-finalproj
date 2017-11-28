@@ -7,7 +7,7 @@ class IousController < ApplicationController
 	def create
 		@iou = Iou.create(description: params[:description], amt: params[:amt], lender_id: params[:lender], debtor_id: params[:debtor])
         if @iou.valid?
-            redirect_to send_paid_mail_path(debtor: @iou.debtor_id)
+            redirect_to '/'
         else
             redirect_to '/transaction/new'
             flash[:error] = @iou.errors.full_messages.to_sentence

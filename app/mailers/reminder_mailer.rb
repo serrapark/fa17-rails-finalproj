@@ -6,8 +6,4 @@ class ReminderMailer < ApplicationMailer
 		mail(to: @user.email, subject: 'Reminder')
 	end
 
-	def paid_email(user)
-		@user = user
-		mail(to: @user.email, subject: 'Payment complete')
-	end
 end
